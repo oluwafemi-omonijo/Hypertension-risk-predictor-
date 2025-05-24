@@ -8,9 +8,6 @@ st.set_page_config(page_title="Hypertension Risk Predictor", layout="centered")
 st.title("🩺 Hypertension Risk Predictor")
 st.markdown("Predict the likelihood of developing hypertension based on clinical and lifestyle features.")
 
-# Sidebar model selection
-model_choice = st.sidebar.selectbox("Select Model", list(model_dict.keys()), index=0)
-model, auc_score = model_dict[model_choice]
 
 #load model
 log_model = joblib.load("logistic_regression_auc_0.9485.pkl")
@@ -24,6 +21,10 @@ model_dict = {
     "Logistic Regression": (log_model, 0.9485),
     "XGBoost": (xgb_model, 0.9479)
 }
+
+# Sidebar model selection
+model_choice = st.sidebar.selectbox("Select Model", list(model_dict.keys()), index=0)
+model, auc_score = model_dict[model_choice]
 
 # User Inputs
 st.markdown("### Enter Patient Information")
